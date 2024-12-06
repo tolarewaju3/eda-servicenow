@@ -1,7 +1,7 @@
 ---
 - name: Listen for events from service now
   sources:
-   - ansible.eda.webhook:
+   - ansible.eda.servicenow:
       host: 0.0.0.0
   rules:
    - name: Test rule
