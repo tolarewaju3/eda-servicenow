@@ -1,0 +1,13 @@
+---
+- name: Listen for events from service now
+  sources:
+   - ansible.eda.webhook:
+      host: 0.0.0.0
+  rules:
+   - name: Test rule
+     condition: event.body != ''
+     action:
+       debug:
+        msg:
+          - "{{ event.body }}"
+          - "{{ event.body.signal }}"

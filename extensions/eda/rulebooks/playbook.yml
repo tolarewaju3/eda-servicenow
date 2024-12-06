@@ -1,0 +1,29 @@
+---
+- name: List all users on RHEL host
+  hosts: my_hosts  # Specify your target host group
+  become: yes  # Use 'become' if root privileges are needed
+  tasks:
+    - name: Install latest passlib with pip
+      pip: name=passlib
+
+    - name: List all users
+      command: getent passwd
+      register: user_list
+
+    - name: Display user list
+      debug:
+        var: user_list.stdout_lines
+
+    - name: Add the user tioluwa
+      user:
+        name: tioluwa
+        state: present  # Ensures the user is present (creates if not already exists)
+        shell: /bin/bash  # Optionally set the default shell
+        comment: "User Tioluwa"  # Optional: Add a comment for the user
+
+    - name: Set password for user tioluwa
+      user:
+        name: tioluwa
+        password: "tioluwa1!"  # Replace 'new_password' with the new password
+
+
