@@ -5,7 +5,7 @@
       host: 0.0.0.0
   rules:
    - name: Test rule
-     condition: event.body != ''
+     condition: event != ''
      action:
        debug:
         msg:
