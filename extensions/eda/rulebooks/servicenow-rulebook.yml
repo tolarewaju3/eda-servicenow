@@ -9,5 +9,4 @@
      action:
        debug:
         msg:
-          - "{{ event.body }}"
-          - "{{ event.body.signal }}"
+          - "{{ event }}"
