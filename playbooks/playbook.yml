@@ -8,7 +8,6 @@
       debug:
         msg: Resetting password for {{ ansible_eda.event.payload.caller.id }}
 
-
     - name: Set password for user
       user:
         name: "{{ ansible_eda.event.payload.caller.id }}"
