@@ -8,7 +8,9 @@
   rules:
    - name: Test rule
      condition: event.meta is defined
-     action:
-       debug:
-        msg:
+     actions:
+       - debug:
+         msg:
           - "{{ event }}"
+       - run_playbook:
+           name: playbooks/playbook.yml
