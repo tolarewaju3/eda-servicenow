@@ -4,10 +4,6 @@
   become: yes  # Use 'become' if root privileges are needed
   tasks:
 
-    - name: Print Vars
-      debug:
-        msg: "{{ ansible_eda.event.payload.caller.id }}"
-
     - name: List all users
       command: getent passwd
       register: user_list
@@ -16,16 +12,15 @@
       debug:
         var: user_list.stdout_lines
 
-    - name: Add the user tioluwa
+    - name: Add the user
       user:
-        name: tioluwa
+        name: "{{ ansible_eda.event.payload.caller.id }}"
         state: present  # Ensures the user is present (creates if not already exists)
         shell: /bin/bash  # Optionally set the default shell
-        comment: "User Tioluwa"  # Optional: Add a comment for the user
 
-    - name: Set password for user tioluwa
+    - name: Set password for user
       user:
-        name: tioluwa
+        name: "{{ ansible_eda.event.payload.caller.id }}"
         password: "tioluwa1!"  # Replace 'new_password' with the new password
 
 
