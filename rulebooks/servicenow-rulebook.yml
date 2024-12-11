@@ -17,4 +17,4 @@
            organization: Default
            job_args:
              extra_vars:
-              user_id: "{{ event.payload.caller.id }}"
+              user_id: tolarewa
