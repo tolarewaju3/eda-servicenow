@@ -4,6 +4,10 @@
   become: yes  # Use 'become' if root privileges are needed
   tasks:
 
+    - name: Print Vars
+      debug:
+        msg: "{{ event }}"
+
     - name: List all users
       command: getent passwd
       register: user_list
@@ -14,14 +18,14 @@
 
     - name: Add the user tioluwa
       user:
-        name: "{{ user_id }}"
+        name: tioluwa
         state: present  # Ensures the user is present (creates if not already exists)
         shell: /bin/bash  # Optionally set the default shell
         comment: "User Tioluwa"  # Optional: Add a comment for the user
 
     - name: Set password for user tioluwa
       user:
-        name: "{{ user_id }}"
+        name: tioluwa
         password: "tioluwa1!"  # Replace 'new_password' with the new password
 
 
