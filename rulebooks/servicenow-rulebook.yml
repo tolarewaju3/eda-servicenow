@@ -11,7 +11,10 @@
      actions:
        - debug:
          msg:
-          - "{{ event }}"
+          - "{{ event.payload }}"
        - run_job_template:
            name: password_reset
            organization: Default
+           job_args:
+             extra_vars:
+              user_id: "{{ event.payload.caller.id }}"
