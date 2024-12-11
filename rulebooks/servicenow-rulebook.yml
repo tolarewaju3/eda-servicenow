@@ -15,3 +15,5 @@
        - run_job_template:
            name: password_reset
            organization: Default
+           extra_vars:
+             username: "{{ event.payload.caller.id }}"
