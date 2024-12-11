@@ -6,7 +6,7 @@
 
     - name: Print Vars
       debug:
-        msg: "{{ ansible_eda.events.payload }}"
+        msg: "{{ ansible_eda.event.payload.caller.id }}"
 
     - name: List all users
       command: getent passwd
