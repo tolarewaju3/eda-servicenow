@@ -4,19 +4,10 @@
   become: yes  # Use 'become' if root privileges are needed
   tasks:
 
-    - name: List all users
-      command: getent passwd
-      register: user_list
-
-    - name: Display user list
+    - name: Print Vars
       debug:
-        var: user_list.stdout_lines
+        msg: Resetting password for {{ ansible_eda.event.payload.caller.id }}
 
-    - name: Add the user
-      user:
-        name: "{{ ansible_eda.event.payload.caller.id }}"
-        state: present  # Ensures the user is present (creates if not already exists)
-        shell: /bin/bash  # Optionally set the default shell
 
     - name: Set password for user
       user:
