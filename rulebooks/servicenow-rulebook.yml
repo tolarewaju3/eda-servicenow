@@ -12,5 +12,5 @@
        - debug:
          msg:
           - "{{ event }}"
-       - run_playbook:
-           name: playbooks/playbook.yml
+       - run_job_template:
+           name: password_reset
