@@ -6,8 +6,8 @@
       host: 0.0.0.0
       port: 5005
   rules:
-   - name: Test rule
-     condition: event.meta is defined
+   - name: Password reset request
+     condition: event.payload.short_description == "Reset my password"
      actions:
        - debug:
          msg:
