@@ -6,11 +6,11 @@
 
     - name: Print Vars
       debug:
-        msg: Resetting password for {{ ansible_eda.event.payload.caller.id }}
+        msg: Resetting password for {{ username }}
 
     - name: Set password for user
       user:
-        name: "{{ ansible_eda.event.payload.caller.id }}"
+        name: "{{ username }}"
         password: "{{ 'NewSecurePassword123!' | password_hash('sha512') }}"
 
 
