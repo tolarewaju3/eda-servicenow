@@ -18,3 +18,5 @@
            job_args:
              extra_vars:
               user_id: tolarewa
+           extra_vars:
+            user_id: tolarewa
