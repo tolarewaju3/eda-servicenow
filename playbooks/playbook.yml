@@ -1,10 +1,8 @@
 ---
 - name: List all users on RHEL host
-  hosts: my_hosts  # Specify your target host group
+  hosts: localhost  # Specify your target host group
   become: yes  # Use 'become' if root privileges are needed
   tasks:
-    - name: Install latest passlib with pip
-      pip: name=passlib
 
     - name: List all users
       command: getent passwd
