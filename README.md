@@ -2,11 +2,9 @@
 
 ## The Problem
 
-If you can beleive it, **40% of an IT help desk time go towards password related tasks** -- such as resetting employee's forgotten passwords.
+**40% of IT help desk time go towards password related tasks**, such as resetting employee's forgotten passwords. While employees wait, productivity stalls, costing money on both ends—IT resolving the issue and employees stuck in limbo. 
 
-To make matters worse, whie an employee waits for this request, they are unable to complete their main work responsibilities. This means losing money on both ends -- the IT help desk resolving the ticket and the employee waiting for resolution.
-
-This is where Event Driven Ansible comes in. It can automatically respond to events, like a new password reset ticket -- saving companies' time and money.
+**Enter Event-Driven Ansible.** It automates responses to events, like password reset tickets, saving time and money instantly.
 
 ## The Architecture
 
