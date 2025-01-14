@@ -115,4 +115,34 @@ There's a lot going on here. You don't need to understand every bit, but here ar
 
 Click Submit to create the rule.
 
+## Setup Ansible Envrionment
+
+You'll need an Ansible environment (2.5) up and running. This guide does not cover how to install Ansible, but you can find those details here.
+
+We'll create two projects -- an execution project and a decision project. 
+
+The execution project contains our playbook that resets the password, while our decision project contains rulebooks to capture ServiceNow events.
+
+**Create a New Execution Project.** Sign in to your ansible instance and select `Automation Execution` --> `Projects` --> `Create project`
+
+* Name: password-reset
+* Organization: Default
+* Execution Environment: Default execution environment
+* Source control type: Git
+* Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
+
+You should see the Last job status as Success.
+
+**Create a New Decision Project.** Sign in to your ansible instance and select `Automation Decisions` --> `Projects` --> `Create project`
+
+Use the following details.
+
+* Name: password-reset
+* Organization: Default
+* Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
+
+
+**Create a New Decision Environment.** On the left panel, select Decision Environment under `Automation Decisions`.
+
+[This should actually be the default decision environment]
 
