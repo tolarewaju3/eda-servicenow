@@ -4,7 +4,7 @@
 
 **40% of IT help desk time go towards password related tasks**, such as resetting employee's forgotten passwords. While employees wait, productivity stalls, costing money on both ends—IT resolving the issue and employees stuck in limbo. 
 
-**Enter Event-Driven Ansible.** It automates responses to events, like password reset tickets, saving time and money instantly.
+**Enter Event-Driven Ansible.** It automates responses to events, like password reset tickets, saving time and money.
 
 ## The Architecture
 
@@ -12,7 +12,9 @@ Our archiecture will capture ServiceNow password reset tickets, reset the passwo
 
 * **SerivceNow Developer Environment** - IT Service management for password reset tickets
 * **Ansible EDA** - Event Driven Automation to respond to password reset tickets
-* **RHEL Host** - Host we will change the password on
+* **RHEL Host** - Password reset target
+
+![ServiceNow home](img/arch_diagram.png)
 
 ## Setup ServiceNow Envrionment
 
