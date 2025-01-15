@@ -12,7 +12,7 @@ A key example of this is resetting employee's forgotten passwords. But while emp
 
 Our archiecture will capture ServiceNow password reset tickets, reset the password on a RHEL host, and notify the user. The architecture has three main parts.
 
-* **SerivceNow Developer Environment** - IT Service management for password reset tickets
+* **SerivceNow Instance** - IT Service management for password reset tickets
 * **Ansible EDA** - Event Driven Automation to respond to password reset tickets
 * **RHEL Host** - Password reset target
 
@@ -28,7 +28,7 @@ Our archiecture will capture ServiceNow password reset tickets, reset the passwo
 
 ## Setup ServiceNow Envrionment
 
-We'll use ServiceNow as our incident management system for password request tickets. If you already have a ServiceNow instance in your environment, feel free to skip this step.
+We'll use ServiceNow as our incident management system for password request tickets. If you already have a ServiceNow instance in your environment, you can skip to the business rule step.
 
 **First, sign up for a ServiceNow developer account.** Navigate to [developer.servicenow.com](https://developer.servicenow.com) and select `Sign Up and Start Building`.
 
