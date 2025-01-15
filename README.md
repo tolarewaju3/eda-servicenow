@@ -48,15 +48,15 @@ Next, we'll send events to Ansible each time we open a ticket (or incident). For
 
 In the top right, select `New` and enter the following:
 
-* Name: Send Incident to Ansible EDA
-* Table: Incident [Incident]
-* Advanced: Selected
-* When to run: async
-* Insert: Selected
+* **Name:** Send Incident to Ansible EDA
+* **Table:** Incident [Incident]
+* **Advanced:** Selected
+* **When to run:** async
+* **Insert:** Selected
 
 ![ServiceNow select business rule](img/business_rule.png)
 
-Switch over to the advanced tab and paste in this code.
+**Switch over to the advanced tab** and replace the code with this.
 
 ```
 (function executeRule(current, previous /*null when async*/) {
@@ -119,9 +119,9 @@ Switch over to the advanced tab and paste in this code.
 
 There's a lot going on here. Here are the important steps.
 
-1. Build a payload with variables from our incident (username, userID, incident number)
-1. Create a REST message with the payload and our authorization headers
-1. Send the REST message to the Ansible webhook url
+1. **Build a payload** with variables from our incident (username, userID, incident number)
+1. **Create a REST message** with the payload and our authorization headers
+1. **Send the REST message** to the Ansible webhook url
 
 Click Submit to create the rule.
 
