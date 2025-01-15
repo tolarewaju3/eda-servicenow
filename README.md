@@ -58,7 +58,7 @@ In the top right, select `New` and enter the following:
 
 **Switch over to the advanced tab** and replace the code with this.
 
-```
+```js
 (function executeRule(current, previous /*null when async*/) {
     // Webhook URL
     var webhookUrl = 'https://aap-aap.apps.cluster-tw277-1.dynamic.redhatworkshops.io/eda-event-streams/api/eda/v1/external_event_stream/7c22ea0b-cec1-4594-8266-7e76d8b8536e/post/';
