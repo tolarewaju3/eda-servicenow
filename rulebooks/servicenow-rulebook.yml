@@ -13,7 +13,7 @@
          msg:
           - "{{ event.payload }}"
        - run_job_template:
-           name: password_reset
+           name: password-reset
            organization: Default
            job_args:
              extra_vars:
