@@ -26,6 +26,85 @@ Our archiecture will capture ServiceNow password reset tickets, reset the passwo
 
 *AAP needs connectivity to the RHEL Host, and ServiceNow needs connectivity to AAP.*
 
+## Setup Ansible Envrionment
+
+We'll create two projects: an execution project and a decision project. 
+
+The execution project contains our playbook that resets the password, while our decision project contains rulebooks to capture ServiceNow events.
+
+**Create a New Execution Project.** Sign in to your ansible instance and select `Automation Execution --> Projects --> Create project`. Use the following details.
+
+* Name: password-reset
+* Organization: Default
+* Execution Environment: Default execution environment
+* Source control type: Git
+* Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
+
+You should see the `Last job status` as Success.
+
+Create Execution Job Template
+
+* Name: password-reset
+* Job type: Run
+* Inventory: Demo inventory (where your RHEL host is)
+* Project: password-reset
+* Playbook: playbooks/playbook.yml
+* Execution Environment: Default execution environment
+* Credentials: (RHEL host creds)
+* Extra vars: Prompt on launch
+
+**Create a New Decision Project.** In your ansible instance, select `Automation Decisions --> Projects --> Create project`. Use the following details.
+
+* Name: password-reset
+* Organization: Default
+* Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
+
+Again, make sure you see the `Last job status` as Success.
+
+Next, we'll create an Event Stream. Event Streams are easy ways to capture events from external systems into Ansible. They are essentially server-side webhooks.
+
+**Create a credential.** In your ansible instance, select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
+
+* Name: servicenow-credential
+* Organization: Default
+* Credential type: ServiceNow Event Stream
+* Token: GENERATE_A_RANDOM_TOKEN
+
+Click Create Credential
+
+We'll also create the event stream for service now to post to.
+**Create an Event Stream.** In your ansible instance, select `Automation Decisions --> Event Streams --> Create Event Stream`. Use the following details.
+
+* Name: servicenow
+* Organization: Default
+* Event stream type: ServiceNow Event Stream
+* Credential: servicenow-credential
+
+Click Create event stream. You should see a url created with the event stream. Copy this url as we'll use it in service now.
+
+We'll also create a AAP credetial so that our rulebook can call jobs.
+
+**Create a credential.** In your ansible instance, select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
+
+* Name: servicenow-credential
+* Organization: Default
+* Credential type: Red Hat Ansible Automation Platform
+* Token: https://<<your_gateway_host>>/api/controller/
+
+Finally, **create a rulebook activation.** Rulebook activations allow rules to be trigged based on an event.
+
+In your ansible instance, select `Automation Decisions --> Rulebook Activations --> Create Rulebook Activation`. Use the following details.
+
+* Name: password-reset
+* Organization: Default
+* Project: password-reset
+* Credential: servicenow-credential
+* Rulebook: servicenow-rulebook.yml
+* Decision Environment: Default decision environment
+* Event streams: servicenow
+
+You should see the `Activation status` as Success.
+
 ## Setup ServiceNow Envrionment
 
 We'll use ServiceNow as our incident management system for password request tickets. If you already have a ServiceNow instance in your environment, you can skip to the business rule step.
@@ -61,7 +140,7 @@ In the top right, select `New` and enter the following:
 ```js
 (function executeRule(current, previous /*null when async*/) {
     // Webhook URL
-    var webhookUrl = 'https://aap-aap.apps.cluster-tw277-1.dynamic.redhatworkshops.io/eda-event-streams/api/eda/v1/external_event_stream/7c22ea0b-cec1-4594-8266-7e76d8b8536e/post/';
+    var webhookUrl = '<your_ansible_event_stream_url>';
 
     var userName = gs.getUser().getName(); // Full name of the user
     var userID = gs.getUser().getID();    // User sys_id
@@ -95,7 +174,7 @@ In the top right, select `New` and enter the following:
     // Create the RESTMessageV2 object
     var restMessage = new sn_ws.RESTMessageV2();
     restMessage.setEndpoint(webhookUrl);
-	restMessage.setRequestHeader('Authorization', 'Bearer emkAoV-uFd0AFu5PSMgcd-m0QdIu6uRP7l5F5rG2XxE');
+	restMessage.setRequestHeader('Authorization', 'Bearer YOUR_TOKEN_HERE');
     restMessage.setHttpMethod('POST');
 
     // Set request headers
@@ -124,32 +203,3 @@ There's a lot going on here. Here are the important steps.
 1. **Send the REST message** to the Ansible webhook url
 
 Click Submit to create the rule.
-
-## Setup Ansible Envrionment
-
-We'll create two projects: an execution project and a decision project. 
-
-The execution project contains our playbook that resets the password, while our decision project contains rulebooks to capture ServiceNow events.
-
-**Create a New Execution Project.** Sign in to your ansible instance and select `Automation Execution --> Projects --> Create project`. Use the following details.
-
-* Name: password-reset
-* Organization: Default
-* Execution Environment: Default execution environment
-* Source control type: Git
-* Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
-
-You should see the `Last job status` as Success.
-
-**Create a New Decision Project.** In your ansible instance, select `Automation Decisions --> Projects --> Create project`. Use the following details.
-
-* Name: password-reset
-* Organization: Default
-* Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
-
-Again, make sure you see the `Last job status` as Success.
-
-**Create a New Decision Environment.** On the left panel, select Decision Environment under `Automation Decisions`.
-
-[This should actually be the default decision environment]
-
