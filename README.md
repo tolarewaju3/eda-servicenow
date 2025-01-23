@@ -34,34 +34,34 @@ The execution project contains our playbook that resets the password, while our 
 
 **Create a New Execution Project.** Sign in to your ansible instance and select `Automation Execution --> Projects --> Create project`. Use the following details.
 
-* Name: password-reset
-* Organization: Default
-* Execution Environment: Default execution environment
-* Source control type: Git
-* Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
+* **Name:** password-reset
+* **Organization:** Default
+* **Execution Environment:** Default execution environment
+* **Source control type:** Git
+* **Source control URL:** https://github.com/tolarewaju3/eda-servicenow.git
 
 You should see the `Last job status` as Success.
 
 ![Exeuciton project](img/execution_project.png)
 
-Create Execution Job Template
+**Create a job template** to run our playbook. In your ansible instance, select `Templates --> Create Template`. Use the following details.
 
-* Name: password-reset
-* Job type: Run
-* Inventory: Demo inventory (where your RHEL host is)
-* Project: password-reset
-* Playbook: playbooks/playbook.yml
-* Execution Environment: Default execution environment
-* Credentials: (RHEL host creds)
-* Extra vars: Prompt on launch
+* **Name:** password-reset
+* **Job type:** Run
+* **Inventory:** Demo inventory (where your RHEL host is)
+* **Project:** password-reset
+* **Playbook:** playbooks/playbook.yml
+* **Execution Environment:** Default execution environment
+* **Credentials:** (RHEL host creds)
+* **Extra vars:** Prompt on launch
 
 ![Job template](img/job_template.png)
 
 **Create a New Decision Project.** In your ansible instance, select `Automation Decisions --> Projects --> Create project`. Use the following details.
 
-* Name: password-reset
-* Organization: Default
-* Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
+* **Name:** password-reset
+* **Organization:** Default
+* **Source control URL:** https://github.com/tolarewaju3/eda-servicenow.git
 
 Again, make sure you see the `Status` as Completed.
 
