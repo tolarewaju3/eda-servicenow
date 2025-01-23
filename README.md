@@ -90,30 +90,32 @@ In your ansible instance, select `Automation Decisions --> Event Streams --> Cre
 * Event stream type: ServiceNow Event Stream
 * Credential: servicenow-credential
 
-Click Create event stream. You should see a url created with the event stream. Copy this url as we'll use it in service now.
+Click Create event stream. After it finishes, copy the webhook url as we'll use this later in ServiceNow.
 
 ![Event stream](img/event_stream.png)
 
-**Now we'll create an AAP credetial** so that our rulebook can call jobs on our Ansible controller. Select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
+**Next, we'll create an AAP credential** so that our rulebook can call jobs on our Ansible controller. 
 
-* Name: aap
-* Organization: Default
-* Credential type: Red Hat Ansible Automation Platform
-* Red Hat Ansible Automation Platform: https://<<your_gateway_host>>/api/controller/
-* Username: <your_aap_admin_username>
-* Password: <your_aap_admin_password>
+Select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
+
+* **Name:** aap
+* **Organization:** Default
+* **Credential type:** Red Hat Ansible Automation Platform
+* **Red Hat Ansible Automation Platform:** https://<<your_gateway_host>>/api/controller/
+* **Username:** <your_aap_admin_username>
+* **Password:** <your_aap_admin_password>
 
 ![AAP Credentials](img/aap_creds.png)
 
-Finally, **create a rulebook activation.** to trigger our password reset job based on the ServiceNow event. Select `Automation Decisions --> Rulebook Activations --> Create Rulebook Activation`. Use the following details.
+Finally, **create a rulebook activation** to trigger our password reset job based on the ServiceNow event. Select `Automation Decisions --> Rulebook Activations --> Create Rulebook Activation`. Use the following details.
 
-* Name: password-reset
-* Organization: Default
-* Project: password-reset
-* Credential: aap
-* Rulebook: servicenow-rulebook.yml
-* Decision Environment: Default decision environment
-* Event streams: servicenow
+* **Name:** password-reset
+* **Organization:** Default
+* **Project:** password-reset
+* **Credential:** aap
+* **Rulebook:** servicenow-rulebook.yml
+* **Decision Environment:** Default decision environment
+* **Event streams:** servicenow
 
 You should see the `Activation status` as Running.
 
