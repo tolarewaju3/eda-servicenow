@@ -32,7 +32,7 @@ We'll create two projects: an execution project and a decision project.
 
 The execution project contains our playbook that resets the password, while our decision project contains rulebooks to capture ServiceNow events.
 
-**Create a New Execution Project.** Sign in to your ansible instance and select `Automation Execution --> Projects --> Create project`. Use the following details.
+**Create an Execution Project.** Sign in to your ansible instance and select `Automation Execution --> Projects --> Create project`. Use the following details.
 
 * **Name:** password-reset
 * **Organization:** Default
@@ -57,6 +57,8 @@ You should see the `Last job status` as Success.
 
 ![Job template](img/job_template.png)
 
+The second project we'll create is a decision project. This contains the event driven logic to receive ServiceNow events and trigger the job template we created.
+
 **Create a New Decision Project.** In your ansible instance, select `Automation Decisions --> Projects --> Create project`. Use the following details.
 
 * **Name:** password-reset
@@ -69,12 +71,12 @@ Again, make sure you see the `Status` as Completed.
 
 Next, we'll create an Event Stream. Event Streams are easy ways to capture events from external systems into Ansible. They are essentially server-side webhooks.
 
-**First, create a token for ServiceNow.** In your ansible instance, select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
+**First, create an Event Stream token.** In your ansible instance, select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
 
-* Name: servicenow-credential
-* Organization: Default
-* Credential type: ServiceNow Event Stream
-* Token: GENERATE_A_RANDOM_TOKEN
+* **Name:** servicenow-credential
+* **Organization:** Default
+* **Credential type:** ServiceNow Event Stream
+* **Token:** GENERATE_A_RANDOM_TOKEN
 
 Click Create Credential.
 
@@ -92,9 +94,7 @@ Click Create event stream. You should see a url created with the event stream. C
 
 ![Event stream](img/event_stream.png)
 
-We'll also create a AAP credetial so that our rulebook can call jobs.
-
-**Create the AAP credential.** In your ansible instance, select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
+**Now we'll create an AAP credetial** so that our rulebook can call jobs on our Ansible controller. Select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
 
 * Name: aap
 * Organization: Default
@@ -103,14 +103,14 @@ We'll also create a AAP credetial so that our rulebook can call jobs.
 * Username: <your_aap_admin_username>
 * Password: <your_aap_admin_password>
 
-Finally, **create a rulebook activation.** Rulebook activations allow rules to be trigged based on an event.
+![AAP Credentials](img/aap_creds.png)
 
-In your ansible instance, select `Automation Decisions --> Rulebook Activations --> Create Rulebook Activation`. Use the following details.
+Finally, **create a rulebook activation.** to trigger our password reset job based on the ServiceNow event. Select `Automation Decisions --> Rulebook Activations --> Create Rulebook Activation`. Use the following details.
 
 * Name: password-reset
 * Organization: Default
 * Project: password-reset
-* Credential: servicenow-credential
+* Credential: aap
 * Rulebook: servicenow-rulebook.yml
 * Decision Environment: Default decision environment
 * Event streams: servicenow
