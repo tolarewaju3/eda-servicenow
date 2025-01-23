@@ -42,6 +42,8 @@ The execution project contains our playbook that resets the password, while our 
 
 You should see the `Last job status` as Success.
 
+![Exeuciton project](img/execution_project.png)
+
 Create Execution Job Template
 
 * Name: password-reset
@@ -53,27 +55,33 @@ Create Execution Job Template
 * Credentials: (RHEL host creds)
 * Extra vars: Prompt on launch
 
+![Job template](img/job_template.png)
+
 **Create a New Decision Project.** In your ansible instance, select `Automation Decisions --> Projects --> Create project`. Use the following details.
 
 * Name: password-reset
 * Organization: Default
 * Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
 
-Again, make sure you see the `Last job status` as Success.
+Again, make sure you see the `Status` as Completed.
+
+![Decision environment](img/decision_environment.png)
 
 Next, we'll create an Event Stream. Event Streams are easy ways to capture events from external systems into Ansible. They are essentially server-side webhooks.
 
-**Create a credential.** In your ansible instance, select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
+**First, create a token for ServiceNow.** In your ansible instance, select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
 
 * Name: servicenow-credential
 * Organization: Default
 * Credential type: ServiceNow Event Stream
 * Token: GENERATE_A_RANDOM_TOKEN
 
-Click Create Credential
+Click Create Credential.
 
-We'll also create the event stream for service now to post to.
-**Create an Event Stream.** In your ansible instance, select `Automation Decisions --> Event Streams --> Create Event Stream`. Use the following details.
+![Credential](img/credential.png)
+
+**Next, create an event stream** for ServiceNow to post to.
+In your ansible instance, select `Automation Decisions --> Event Streams --> Create Event Stream`. Use the following details.
 
 * Name: servicenow
 * Organization: Default
@@ -82,14 +90,18 @@ We'll also create the event stream for service now to post to.
 
 Click Create event stream. You should see a url created with the event stream. Copy this url as we'll use it in service now.
 
+![Event stream](img/event_stream.png)
+
 We'll also create a AAP credetial so that our rulebook can call jobs.
 
-**Create a credential.** In your ansible instance, select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
+**Create the AAP credential.** In your ansible instance, select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
 
-* Name: servicenow-credential
+* Name: aap
 * Organization: Default
 * Credential type: Red Hat Ansible Automation Platform
-* Token: https://<<your_gateway_host>>/api/controller/
+* Red Hat Ansible Automation Platform: https://<<your_gateway_host>>/api/controller/
+* Username: <your_aap_admin_username>
+* Password: <your_aap_admin_password>
 
 Finally, **create a rulebook activation.** Rulebook activations allow rules to be trigged based on an event.
 
@@ -103,7 +115,9 @@ In your ansible instance, select `Automation Decisions --> Rulebook Activations 
 * Decision Environment: Default decision environment
 * Event streams: servicenow
 
-You should see the `Activation status` as Success.
+You should see the `Activation status` as Running.
+
+![Rulebook activation](img/rulebook_activation.png)
 
 ## Setup ServiceNow Envrionment
 
