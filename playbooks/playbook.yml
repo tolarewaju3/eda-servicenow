@@ -1,6 +1,6 @@
 ---
 - name: List all users on RHEL host
-  hosts: RHEL  # Specify your target host group
+  hosts: all  # Specify your target host group
   become: yes  # Use 'become' if root privileges are needed
   tasks:
 
