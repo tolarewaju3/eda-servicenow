@@ -82,13 +82,13 @@ Click Create Credential.
 
 ![Credential](img/credential.png)
 
-**Next, create an event stream** for ServiceNow to post to.
-In your ansible instance, select `Automation Decisions --> Event Streams --> Create Event Stream`. Use the following details.
+**Next, create an event stream** for ServiceNow to send events to.
+Select `Automation Decisions --> Event Streams --> Create Event Stream`. Use the following details.
 
-* Name: servicenow
-* Organization: Default
-* Event stream type: ServiceNow Event Stream
-* Credential: servicenow-credential
+* **Name:** servicenow
+* **Organization:** Default
+* **Event stream type:** ServiceNow Event Stream
+* **Credential:** servicenow-credential
 
 Click Create event stream. After it finishes, copy the webhook url as we'll use this later in ServiceNow.
 
