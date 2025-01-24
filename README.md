@@ -85,13 +85,13 @@ We'll create a rulebook activation. Rulebook activations **detect events from a 
 
 First, **create a decision project.** Under the *Automation Decisions* menu, select *Projects* and **choose Create a new project**. Use the following details.
 
+![Decision project](img/decision_project.png)
+
 ```
 Name: password-reset
 Organization: Default
 Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
 ```
-
-![Decision project](img/decision_project.png)
 
 Create the project. Make sure the Status shows `Completed`.
 
