@@ -150,7 +150,32 @@ Event streams: servicenow
 ```
 ![Rulebook activation](img/rulebook_activation.png)
 
-**Create the rulebook.** This rulebook will trigger our password reset job based on the ServiceNow event. After it finishes, the Activation status should be `Running`.
+**Create the rulebook.** This rulebook will trigger our password reset job when it receives events from ServiceNow. ServiceNow event. Here's the rulebook we're using.
+
+```yml
+---
+- name: Listen for events from service now
+  hosts: all
+  sources:
+   - ansible.eda.webhook:
+      host: 0.0.0.0
+      port: 5005
+  rules:
+   - name: Password reset request
+     condition: event.payload.short_description == "Reset my password"
+     actions:
+       - debug:
+         msg:
+          - "{{ event.payload }}"
+       - run_job_template:
+           name: password-reset
+           organization: Default
+           job_args:
+             extra_vars:
+               username: "{{ event.payload.caller.id }}"
+```
+
+After the rulebook activation starts, the Activation status should be `Running`.
 
 ## Setup ServiceNow Envrionment
 
