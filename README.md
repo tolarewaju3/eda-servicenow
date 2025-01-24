@@ -139,7 +139,7 @@ Password: <your_aap_admin_password>
 
 **Create the credential.** This credential will allow our rulebook to call the password reset job on our Ansible controller. You can find your gateway url in the setting tab.
 
-**Finally, create a rulebook activation.** Under the **Automation Decisions** menu, in the **Rulebook Activations** section, choose **Create Rulebook Activation.** 
+**Finally, create a rulebook activation.** Under the *Automation Decisions* menu, in the *Rulebook Activations* section, choose **Create Rulebook Activation.** 
 
 ```
 Name: password-reset
