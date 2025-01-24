@@ -130,15 +130,15 @@ Click **Create event stream**. After it finishes, **copy the webhook url** as we
 **Create the credential.** This credential will allow our rulebook to call the password reset job on our Ansible controller. You can find your gateway url in the setting tab.
 
 **Finally, create a rulebook activation.** Under the **Automation Decisions** menu, in the **Rulebook Activations** section, choose **Create Rulebook Activation.** 
-
-* **Name:** password-reset
-* **Organization:** Default
-* **Project:** password-reset
-* **Credential:** aap
-* **Rulebook:** servicenow-rulebook.yml
-* **Decision Environment:** Default decision environment
-* **Event streams:** servicenow
-
+```
+Name: password-reset
+Organization: Default
+Project: password-reset
+Credential: aap
+Rulebook: servicenow-rulebook.yml
+Decision Environment: Default decision environment
+Event streams: servicenow
+```
 **Create the rulebook.** This rulebook will trigger our password reset job based on the ServiceNow event. After it finishes, the Activation status should be `Running`.
 
 ![Rulebook activation](img/rulebook_activation.png)
