@@ -28,9 +28,7 @@ Our architecture will capture ServiceNow password reset tickets, reset the passw
 
 ## Setup Ansible Envrionment
 
-We'll create two things: a job template and a rulebook. 
-
-The job template will run a playbook that resets the password on the RHEL host, while our rulebook will capture ServiceNow events and call the job template.
+We'll create a job template and a rulebook. The job template **runs a playbook to reset the password** on the RHEL host, while the rulebook **captures ServiceNow events and calls the job template.**
 
 ### Create a Job Template
 
