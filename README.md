@@ -28,11 +28,11 @@ Our archiecture will capture ServiceNow password reset tickets, reset the passwo
 
 ## Setup Ansible Envrionment
 
-We'll create two projects: an execution project and a decision project. 
+We'll create two things: an job template and a rulebook. 
 
-The execution project contains a playbook that resets the password on the RHEL host, while our decision project a rulebook that captures ServiceNow events and calls the playbook.
+The job template will run a playbook that resets the password on the RHEL host, while our rulebook will capture ServiceNow events and call the job template.
 
-### Create an Execution Project
+### Create a Job Template
 
 First, sign in to your ansible instance and select `Automation Execution --> Projects --> Create project`. Use the following details.
 
@@ -78,11 +78,9 @@ This repository contains a playbook to reset a password on a RHEL host. It's by 
 
 ![Job template](img/job_template.png)
 
-### Create a Deicison Project
+### Create a Rulebook Activation
 
-The second project we'll create is a decision project. This contains the event driven logic to receive ServiceNow events and trigger the job template we created.
-
-First, select `Automation Decisions --> Projects --> Create project`. Use the following details.
+Under the **Automation Decisions** menu, select **Projects** and choose **Create a new project**. Use the following details.
 
 * **Name:** password-reset
 * **Organization:** Default
@@ -92,9 +90,9 @@ Again, make sure you see the `Status` as Completed.
 
 ![Decision environment](img/decision_environment.png)
 
-Next, we'll create an Event Stream. Event Streams are easy ways to capture events from external systems into Ansible. This is the server-side webhook the ServiceNow will send events to.
+Next, we'll create an Event Stream. Event Streams are easy ways to capture events from external systems. This is the server-side webhook the ServiceNow will send events to.
 
-**Create an Event Stream token.** Select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
+**Create an Event Stream token.** Under the **Automation Decisions** menu, in the **Infrastructure** section, select **Credentials** and choose **Create a Credential**. Use the following details.
 
 * **Name:** servicenow-credential
 * **Organization:** Default
@@ -105,20 +103,18 @@ Click Create Credential.
 
 ![Credential](img/credential.png)
 
-**Next, create the event stream.** Select `Automation Decisions --> Event Streams --> Create Event Stream`. Use the following details.
+**Next, create the event stream.** Under the **Automation Decisions** menu, select **Event Streams** and choose **Create Event Stream**. Use the following details.
 
 * **Name:** servicenow
 * **Organization:** Default
 * **Event stream type:** ServiceNow Event Stream
 * **Credential:** servicenow-credential
 
-Click Create event stream. After it finishes, **copy the webhook url** as we'll use this later in ServiceNow.
+Click **Create event stream**. After it finishes, **copy the webhook url** as we'll use this later in ServiceNow.
 
 ![Event stream](img/event_stream.png)
 
-**Next, we'll create an AAP credential** so that our rulebook can call the password reset job on our Ansible controller. 
-
-Select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`.
+**Next, we'll create an AAP credential.** Under the **Automation Decisions** menu, in the **Infrastructure** section, select **Credentials** and choose **Create a Credential**.
 
 * **Name:** aap
 * **Organization:** Default
@@ -129,7 +125,9 @@ Select `Automation Decisions --> Infrastructure --> Credentials --> Create Crede
 
 ![AAP Credentials](img/aap_creds.png)
 
-Finally, **create a rulebook activation** to trigger our password reset job based on the ServiceNow event. Select `Automation Decisions --> Rulebook Activations --> Create Rulebook Activation`.
+This credential will allow our rulebook to call the password reset job on our Ansible controller. You can find your gateway url in the setting tab.
+
+**Finally, create a rulebook activation.** Under the **Automation Decisions** menu, in the **Rulebook Activations** section, choose **Create Rulebook Activation.** 
 
 * **Name:** password-reset
 * **Organization:** Default
@@ -139,7 +137,7 @@ Finally, **create a rulebook activation** to trigger our password reset job base
 * **Decision Environment:** Default decision environment
 * **Event streams:** servicenow
 
-You should see the `Activation status` as Running.
+This rulebook will trigger our password reset job based on the ServiceNow event. After it finishes, the Activation status should be `Running`.
 
 ![Rulebook activation](img/rulebook_activation.png)
 
@@ -155,15 +153,15 @@ Fill out the relevant information and hit `Sign Up`. Once you're signed in, you 
 
 ![ServiceNow sign in](img/servicenow_signin.png)
 
-**Request your ServiceNow instance**. In the top right corner, select `Request Instance`. This may take a while, but eventually you should be able open your ServiceNow developer instance.
+**Request your ServiceNow instance**. In the top right corner, select **Request Instance**. This may take a while, but eventually you should be able open your ServiceNow developer instance.
 
 Next, we'll send events to Ansible each time we open a ticket (or incident). For entierprise instances of ServiceNow, there's an Ansible EDA add-on from the store. But if you're using the developer instance, we'll create a business rule to send events.
 
-**Create a Business Rule**. In your instance, go to the top left and select `All`. Type `Business Rule` into the search bar. Select the one under `System Definition`.
+**Create a Business Rule**. In your instance, go to the top left and select **All**. Type **Business Rule** into the search bar. Select the one under **System Definition**.
 
 ![ServiceNow select business rule](img/select_business_rule.png)
 
-In the top right, select `New` and enter the following:
+In the top right, select **New** and enter the following:
 
 * **Name:** Send Incident to Ansible EDA
 * **Table:** Incident [Incident]
