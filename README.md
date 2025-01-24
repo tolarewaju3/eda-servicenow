@@ -32,7 +32,7 @@ We'll create two projects: an execution project and a decision project.
 
 The execution project contains a playbook that resets the password on the RHEL host, while our decision project a rulebook that captures ServiceNow events and calls the playbook.
 
-### Create Execution Project
+### Create an Execution Project
 
 First, sign in to your ansible instance and select `Automation Execution --> Projects --> Create project`. Use the following details.
 
@@ -78,7 +78,7 @@ This repository contains a playbook to reset a password on a RHEL host. It's by 
 
 ![Job template](img/job_template.png)
 
-### Create Deicison Project
+### Create a Deicison Project
 
 The second project we'll create is a decision project. This contains the event driven logic to receive ServiceNow events and trigger the job template we created.
 
@@ -116,9 +116,9 @@ Click Create event stream. After it finishes, **copy the webhook url** as we'll 
 
 ![Event stream](img/event_stream.png)
 
-**Then, we'll create an AAP credential** so that our rulebook can call the password reset job on our Ansible controller. 
+**Next, we'll create an AAP credential** so that our rulebook can call the password reset job on our Ansible controller. 
 
-Select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
+Select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`.
 
 * **Name:** aap
 * **Organization:** Default
