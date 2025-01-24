@@ -46,7 +46,7 @@ Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
 
 Create the project. You should see the `Last job status` as Success.
 
-**Create a job template.** Under the *Automation Execution* memu, select *Templates* and **choose Create Template**. Use the following details.
+**Next, create a job template.** Under the *Automation Execution* memu, select *Templates* and **choose Create Template**. Use the following details.
 
 ```
 Name: password-reset
