@@ -34,7 +34,7 @@ The job template will run a playbook that resets the password on the RHEL host, 
 
 ### Create a Job Template
 
-First, sign in to your ansible instance and select `Automation Execution --> Projects --> Create project`. Use the following details.
+First, **sign in** to your ansible instance. Under the **Automation Execution** memu, select **Projects** and choose **Create project**. Use the following details.
 
 * **Name:** password-reset
 * **Organization:** Default
@@ -42,11 +42,24 @@ First, sign in to your ansible instance and select `Automation Execution --> Pro
 * **Source control type:** Git
 * **Source control URL:** https://github.com/tolarewaju3/eda-servicenow.git
 
-You should see the `Last job status` as Success.
+Create the project. You should see the `Last job status` as Success.
 
 ![Exeuciton project](img/execution_project.png)
 
-This repository contains a playbook to reset a password on a RHEL host. It's by no means meant for production (as the password is in plain text), but it'll work for us. Here's the playbook.
+**Create a job template** to run our playbook. Under the **Automation Execution** memu, select **Templates** and choose **Create Template**. Use the following details.
+
+* **Name:** password-reset
+* **Job type:** Run
+* **Inventory:** Demo inventory (where your RHEL host is)
+* **Project:** password-reset
+* **Playbook:** playbooks/playbook.yml
+* **Execution Environment:** Default execution environment
+* **Credentials:** Create credentials for to access your RHEL host
+* **Extra vars:** Prompt on launch
+
+![Job template](img/job_template.png)
+
+**Create the job template.** This template runs a playbook to reset the password of user on a RHEL host. It's NOT production-ready (as the password is in plain text), but it'll work for us. Here's the playbook.
 
 ```yml
 ---
@@ -65,20 +78,9 @@ This repository contains a playbook to reset a password on a RHEL host. It's by 
         password: "{{ 'NewSecurePassword123!' | password_hash('sha512') }}"
 ```
 
-**Create a job template** to run our playbook. In your ansible instance, select `Templates --> Create Template`. Use the following details.
-
-* **Name:** password-reset
-* **Job type:** Run
-* **Inventory:** Demo inventory (where your RHEL host is)
-* **Project:** password-reset
-* **Playbook:** playbooks/playbook.yml
-* **Execution Environment:** Default execution environment
-* **Credentials:** Create credentials for to access your RHEL host
-* **Extra vars:** Prompt on launch
-
-![Job template](img/job_template.png)
-
 ### Create a Rulebook Activation
+
+We'll create a rulebook activation. Rulebook activations **detect events from a source and trigger automations.**
 
 Under the **Automation Decisions** menu, select **Projects** and choose **Create a new project**. Use the following details.
 
@@ -86,20 +88,20 @@ Under the **Automation Decisions** menu, select **Projects** and choose **Create
 * **Organization:** Default
 * **Source control URL:** https://github.com/tolarewaju3/eda-servicenow.git
 
-Again, make sure you see the `Status` as Completed.
+Create the project. Make sure the Status shows `Completed`.
 
 ![Decision environment](img/decision_environment.png)
 
-Next, we'll create an Event Stream. Event Streams are easy ways to capture events from external systems. This is the server-side webhook the ServiceNow will send events to.
+Next, we'll create an Event Stream. Event Streams are a **simple way to capture events from external systems.** This serves as the server-side webhook where ServiceNow will send events.
 
 **Create an Event Stream token.** Under the **Automation Decisions** menu, in the **Infrastructure** section, select **Credentials** and choose **Create a Credential**. Use the following details.
 
 * **Name:** servicenow-credential
 * **Organization:** Default
 * **Credential type:** ServiceNow Event Stream
-* **Token:** Generate a random token and write it down! We'll use it later
+* **Token:** [Generate a random token](https://it-tools.tech/token-generator?length=21). Save this for later!
 
-Click Create Credential.
+Click Create Credential. This token will be used in our webhook and sent with our ServiceNow REST calls. 
 
 ![Credential](img/credential.png)
 
@@ -125,7 +127,7 @@ Click **Create event stream**. After it finishes, **copy the webhook url** as we
 
 ![AAP Credentials](img/aap_creds.png)
 
-This credential will allow our rulebook to call the password reset job on our Ansible controller. You can find your gateway url in the setting tab.
+**Create the credential.** This credential will allow our rulebook to call the password reset job on our Ansible controller. You can find your gateway url in the setting tab.
 
 **Finally, create a rulebook activation.** Under the **Automation Decisions** menu, in the **Rulebook Activations** section, choose **Create Rulebook Activation.** 
 
@@ -137,7 +139,7 @@ This credential will allow our rulebook to call the password reset job on our An
 * **Decision Environment:** Default decision environment
 * **Event streams:** servicenow
 
-This rulebook will trigger our password reset job based on the ServiceNow event. After it finishes, the Activation status should be `Running`.
+**Create the rulebook.** This rulebook will trigger our password reset job based on the ServiceNow event. After it finishes, the Activation status should be `Running`.
 
 ![Rulebook activation](img/rulebook_activation.png)
 
@@ -145,11 +147,11 @@ This rulebook will trigger our password reset job based on the ServiceNow event.
 
 We'll use ServiceNow as our incident management system for password request tickets. If you already have a ServiceNow instance in your environment, you can skip to the "Create a Business Rule" step.
 
-**First, sign up for a ServiceNow developer account.** Navigate to [developer.servicenow.com](https://developer.servicenow.com) and select `Sign Up and Start Building`.
+**First, sign up for a ServiceNow developer account.** Navigate to [developer.servicenow.com](https://developer.servicenow.com) and select **Sign Up and Start Building**.
 
 ![ServiceNow home](img/servicenow_home.png)
 
-Fill out the relevant information and hit `Sign Up`. Once you're signed in, you should see this screen.
+Fill out the relevant information and hit **Sign Up**. Once you're signed in, you should see this screen.
 
 ![ServiceNow sign in](img/servicenow_signin.png)
 
