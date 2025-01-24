@@ -82,7 +82,7 @@ Create the project. You should see the `Last job status` as Success.
 
 We'll create a rulebook activation. Rulebook activations **detect events from a source and trigger automations.**
 
-Under the **Automation Decisions** menu, select **Projects** and choose **Create a new project**. Use the following details.
+First, we'll create a decision project. Under the **Automation Decisions** menu, select **Projects** and choose **Create a new project**. Use the following details.
 
 * **Name:** password-reset
 * **Organization:** Default
