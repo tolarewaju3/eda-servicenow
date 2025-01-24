@@ -277,3 +277,23 @@ There's a lot going on here. Here are the important steps.
 1. **Send the REST message** to the Ansible webhook url
 
 **Click Submit** to create the rule.
+
+## Create a ServiceNow ticket
+
+First, we'll create a user with the same username as the one on our RHEL host. We'll submit the ticket with this user and it'll change their password.
+
+Go to the top left and select **All**. Type `Users` into the search bar and select the one under **Organization**. Click the **New** button in the top right.
+
+```
+User ID: test-user
+Firstname: Test
+Lastname: User
+```
+
+Hit Submit.
+
+**Create an Incident**. Go to the top left and select **All**. Type `Incidents` into the search bar and choose the one under **Self Service**.
+
+Change the caller to `test-user`. For the short description, select the lightbulb on the right and **choose Reset my password.** Our rulebook will only fire for events that contain the description "Password reset".
+
+**Submit the incident.** If all went well, you should see the job template run in AAP.
