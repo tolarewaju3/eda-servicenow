@@ -292,7 +292,7 @@ Lastname: User
 
 Hit Submit.
 
-**Create an Incident**. Go to the top left and select **All**. Type `Incidents` into the search bar and choose the one under **Self Service**.
+**Create an Incident**. Go to the top left and select **All**. Type `Incidents` into the search bar and choose the one under **Self Service**. Click the **New** button in the top right.
 
 Change the caller to `test-user`. For the short description, select the lightbulb on the right and **choose Reset my password.** Our rulebook will only fire for events that contain the description "Password reset".
 
