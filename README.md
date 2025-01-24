@@ -36,7 +36,7 @@ The job template will run a playbook that resets the password on the RHEL host, 
 
 First, **sign in** to your ansible instance. Under the **Automation Execution** memu, select **Projects** and choose **Create project**. Use the following details.
 
-```yml
+```
 Name: password-reset
 Organization: Default
 Execution Environment: Default execution environment
@@ -50,7 +50,7 @@ Create the project. You should see the `Last job status` as Success.
 
 **Create a job template** to run our playbook. Under the **Automation Execution** memu, select **Templates** and choose **Create Template**. Use the following details.
 
-```yml
+```
 Name: password-reset
 Job type: Run
 Inventory: Demo inventory (where your RHEL host is)
@@ -101,7 +101,7 @@ Next, we'll create an Event Stream. Event Streams are a **simple way to capture 
 
 **Create an Event Stream token.** Under the **Automation Decisions** menu, in the **Infrastructure** section, select **Credentials** and choose **Create a Credential**. Use the following details.
 
-```yml
+```
 Name: servicenow-credential
 Organization: Default
 Credential type: ServiceNow Event Stream
@@ -113,7 +113,7 @@ Click Create Credential. This token will be used in our webhook and sent with ou
 
 **Next, create the event stream.** Under the **Automation Decisions** menu, select **Event Streams** and choose **Create Event Stream**. Use the following details.
 
-```yml
+```
 Name: servicenow
 Organization: Default
 Event stream type: ServiceNow Event Stream
@@ -126,7 +126,7 @@ Click **Create event stream**. After it finishes, **copy the webhook url** as we
 
 **Next, we'll create an AAP credential.** Under the **Automation Decisions** menu, in the **Infrastructure** section, select **Credentials** and choose **Create a Credential**.
 
-```yml
+```
 Name: aap
 Organization: Default
 Credential type: Red Hat Ansible Automation Platform
@@ -141,7 +141,7 @@ Password: <your_aap_admin_password>
 
 **Finally, create a rulebook activation.** Under the **Automation Decisions** menu, in the **Rulebook Activations** section, choose **Create Rulebook Activation.** 
 
-```yml
+```
 Name: password-reset
 Organization: Default
 Project: password-reset
