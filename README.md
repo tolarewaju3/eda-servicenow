@@ -10,7 +10,7 @@ A key example of this is resetting employee's forgotten passwords. But while emp
 
 ## The Architecture
 
-Our archiecture will capture ServiceNow password reset tickets, reset the password on a RHEL host, and notify the user. The architecture has three main parts.
+Our architecture will capture ServiceNow password reset tickets, reset the password on a RHEL host, and notify the user. The architecture has three main parts.
 
 * **SerivceNow** - IT Service management where we'll submit password reset tickets
 * **Ansible EDA** - Event Driven Automation to respond to password reset tickets
@@ -28,13 +28,13 @@ Our archiecture will capture ServiceNow password reset tickets, reset the passwo
 
 ## Setup Ansible Envrionment
 
-We'll create two things: an job template and a rulebook. 
+We'll create two things: a job template and a rulebook. 
 
 The job template will run a playbook that resets the password on the RHEL host, while our rulebook will capture ServiceNow events and call the job template.
 
 ### Create a Job Template
 
-First, **sign in** to your ansible instance. Under the **Automation Execution** memu, select **Projects** and choose **Create project**. Use the following details.
+First, **sign in** to your ansible instance. Under the *Automation Execution* memu, select *Projects* and **choose Create project**. Use the following details.
 
 ```
 Name: password-reset
@@ -48,7 +48,7 @@ Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
 
 Create the project. You should see the `Last job status` as Success.
 
-**Create a job template** to run our playbook. Under the **Automation Execution** memu, select **Templates** and choose **Create Template**. Use the following details.
+**Create a job template.** Under the *Automation Execution* memu, select *Templates* and **choose Create Template**. Use the following details.
 
 ```
 Name: password-reset
@@ -85,7 +85,7 @@ Extra vars: Prompt on launch
 
 We'll create a rulebook activation. Rulebook activations **detect events from a source and trigger automations.**
 
-First, we'll create a decision project. Under the **Automation Decisions** menu, select **Projects** and choose **Create a new project**. Use the following details.
+First, **create a decision project.** Under the *Automation Decisions* menu, select *Projects* and **choose Create a new project**. Use the following details.
 
 ```
 Name: password-reset
@@ -99,7 +99,7 @@ Create the project. Make sure the Status shows `Completed`.
 
 Next, we'll create an Event Stream. Event Streams are a **simple way to capture events from external systems.** This serves as the server-side webhook where ServiceNow will send events.
 
-**Create an Event Stream token.** Under the **Automation Decisions** menu, in the **Infrastructure** section, select **Credentials** and choose **Create a Credential**. Use the following details.
+**Create an Event Stream token.** Under the *Automation Decisions* menu, in the *Infrastructure* section, select *Credentials* and **choose Create a Credential**. Use the following details.
 
 ```
 Name: servicenow-credential
@@ -111,7 +111,7 @@ Token: Generate a random token and save it for later!
 
 Click Create Credential. This token will be used in our webhook and sent with our ServiceNow REST calls. You can generate a random token [here](https://it-tools.tech/token-generator?length=21)
 
-**Next, create the event stream.** Under the **Automation Decisions** menu, select **Event Streams** and choose **Create Event Stream**. Use the following details.
+**Next, create the event stream.** Under the *Automation Decisions* menu, select *Event Streams* and **choose Create Event Stream**. Use the following details.
 
 ```
 Name: servicenow
@@ -124,7 +124,7 @@ Credential: servicenow-credential
 
 Click **Create event stream**. After it finishes, **copy the webhook url** as we'll use this later in ServiceNow.
 
-**Next, we'll create an AAP credential.** Under the **Automation Decisions** menu, in the **Infrastructure** section, select **Credentials** and choose **Create a Credential**.
+**Next, we'll create an AAP credential.** Under the *Automation Decisions* menu, in the *Infrastructure* section, select *Credentials* and **choose Create a Credential**.
 
 ```
 Name: aap
@@ -253,4 +253,4 @@ There's a lot going on here. Here are the important steps.
 1. **Create a REST message** with the payload and our authorization headers
 1. **Send the REST message** to the Ansible webhook url
 
-Click Submit to create the rule.
+**Click Submit** to create the rule.
