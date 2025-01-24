@@ -91,7 +91,7 @@ Organization: Default
 Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
 ```
 
-![Decision environment](img/decision_environment.png)
+![Decision project](img/decision_project.png)
 
 Create the project. Make sure the Status shows `Completed`.
 
@@ -284,6 +284,8 @@ First, we'll create a user with the same username as the one on our RHEL host. W
 
 Go to the top left and select **All**. Type `Users` into the search bar and select the one under **Organization**. Click the **New** button in the top right.
 
+![New User](img/new_servicenow_user.png)
+
 ```
 User ID: test-user
 Firstname: Test
@@ -295,5 +297,7 @@ Hit Submit.
 **Create an Incident**. Go to the top left and select **All**. Type `Incidents` into the search bar and choose the one under **Self Service**. Click the **New** button in the top right.
 
 Change the caller to `test-user`. For the short description, select the lightbulb on the right and **choose Reset my password.** Our rulebook will only fire for events that contain the description "Password reset".
+
+![New Ticket](img/new_servicenow_ticket.png)
 
 **Submit the incident.** If all went well, you should see the job template run in AAP.
