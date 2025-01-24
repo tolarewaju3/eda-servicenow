@@ -42,9 +42,9 @@ First, **sign in** to your ansible instance. Under the **Automation Execution** 
 * **Source control type:** Git
 * **Source control URL:** https://github.com/tolarewaju3/eda-servicenow.git
 
-Create the project. You should see the `Last job status` as Success.
-
 ![Exeuciton project](img/execution_project.png)
+
+Create the project. You should see the `Last job status` as Success.
 
 **Create a job template** to run our playbook. Under the **Automation Execution** memu, select **Templates** and choose **Create Template**. Use the following details.
 
@@ -88,9 +88,9 @@ Under the **Automation Decisions** menu, select **Projects** and choose **Create
 * **Organization:** Default
 * **Source control URL:** https://github.com/tolarewaju3/eda-servicenow.git
 
-Create the project. Make sure the Status shows `Completed`.
-
 ![Decision environment](img/decision_environment.png)
+
+Create the project. Make sure the Status shows `Completed`.
 
 Next, we'll create an Event Stream. Event Streams are a **simple way to capture events from external systems.** This serves as the server-side webhook where ServiceNow will send events.
 
@@ -101,9 +101,9 @@ Next, we'll create an Event Stream. Event Streams are a **simple way to capture 
 * **Credential type:** ServiceNow Event Stream
 * **Token:** [Generate a random token](https://it-tools.tech/token-generator?length=21). Save this for later!
 
-Click Create Credential. This token will be used in our webhook and sent with our ServiceNow REST calls. 
-
 ![Credential](img/credential.png)
+
+Click Create Credential. This token will be used in our webhook and sent with our ServiceNow REST calls. 
 
 **Next, create the event stream.** Under the **Automation Decisions** menu, select **Event Streams** and choose **Create Event Stream**. Use the following details.
 
@@ -112,9 +112,9 @@ Click Create Credential. This token will be used in our webhook and sent with ou
 * **Event stream type:** ServiceNow Event Stream
 * **Credential:** servicenow-credential
 
-Click **Create event stream**. After it finishes, **copy the webhook url** as we'll use this later in ServiceNow.
-
 ![Event stream](img/event_stream.png)
+
+Click **Create event stream**. After it finishes, **copy the webhook url** as we'll use this later in ServiceNow.
 
 **Next, we'll create an AAP credential.** Under the **Automation Decisions** menu, in the **Infrastructure** section, select **Credentials** and choose **Create a Credential**.
 
@@ -139,9 +139,9 @@ Rulebook: servicenow-rulebook.yml
 Decision Environment: Default decision environment
 Event streams: servicenow
 ```
-**Create the rulebook.** This rulebook will trigger our password reset job based on the ServiceNow event. After it finishes, the Activation status should be `Running`.
-
 ![Rulebook activation](img/rulebook_activation.png)
+
+**Create the rulebook.** This rulebook will trigger our password reset job based on the ServiceNow event. After it finishes, the Activation status should be `Running`.
 
 ## Setup ServiceNow Envrionment
 
