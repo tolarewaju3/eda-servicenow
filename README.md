@@ -166,7 +166,7 @@ Fill out the relevant information and hit **Sign Up**. Once you're signed in, yo
 
 **Request your ServiceNow instance**. In the top right corner, select **Request Instance**. This may take a while, but eventually you should be able open your ServiceNow developer instance.
 
-Next, we'll send events to Ansible each time we open a ticket (or incident). For entierprise instances of ServiceNow, there's an Ansible EDA add-on from the store. But if you're using the developer instance, we'll create a business rule to send events.
+We'll send events to Ansible each time we open a ticket (or incident). For entierprise instances of ServiceNow, there's an Ansible EDA add-on from the store. But if you're using the developer instance, we'll create a business rule to send events.
 
 **Create a Business Rule**. In your instance, go to the top left and select **All**. Type **Business Rule** into the search bar. Select the one under **System Definition**.
 
