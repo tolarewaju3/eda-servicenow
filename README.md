@@ -96,14 +96,15 @@ Next, we'll create an Event Stream. Event Streams are a **simple way to capture 
 
 **Create an Event Stream token.** Under the **Automation Decisions** menu, in the **Infrastructure** section, select **Credentials** and choose **Create a Credential**. Use the following details.
 
-* **Name:** servicenow-credential
-* **Organization:** Default
-* **Credential type:** ServiceNow Event Stream
-* **Token:** [Generate a random token](https://it-tools.tech/token-generator?length=21). Save this for later!
-
+```yml
+Name: servicenow-credential
+Organization: Default
+Credential type: ServiceNow Event Stream
+Token: Generate a random token and save it for later!
+```
 ![Credential](img/credential.png)
 
-Click Create Credential. This token will be used in our webhook and sent with our ServiceNow REST calls. 
+Click Create Credential. This token will be used in our webhook and sent with our ServiceNow REST calls. You can generate a random token [here](https://it-tools.tech/token-generator?length=21)
 
 **Next, create the event stream.** Under the **Automation Decisions** menu, select **Event Streams** and choose **Create Event Stream**. Use the following details.
 
