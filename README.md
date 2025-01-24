@@ -36,11 +36,13 @@ The job template will run a playbook that resets the password on the RHEL host, 
 
 First, **sign in** to your ansible instance. Under the **Automation Execution** memu, select **Projects** and choose **Create project**. Use the following details.
 
-* **Name:** password-reset
-* **Organization:** Default
-* **Execution Environment:** Default execution environment
-* **Source control type:** Git
-* **Source control URL:** https://github.com/tolarewaju3/eda-servicenow.git
+```yml
+Name: password-reset
+Organization: Default
+Execution Environment: Default execution environment
+Source control type: Git
+Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
+```
 
 ![Exeuciton project](img/execution_project.png)
 
@@ -48,15 +50,16 @@ Create the project. You should see the `Last job status` as Success.
 
 **Create a job template** to run our playbook. Under the **Automation Execution** memu, select **Templates** and choose **Create Template**. Use the following details.
 
-* **Name:** password-reset
-* **Job type:** Run
-* **Inventory:** Demo inventory (where your RHEL host is)
-* **Project:** password-reset
-* **Playbook:** playbooks/playbook.yml
-* **Execution Environment:** Default execution environment
-* **Credentials:** Create credentials for to access your RHEL host
-* **Extra vars:** Prompt on launch
-
+```yml
+Name: password-reset
+Job type: Run
+Inventory: Demo inventory (where your RHEL host is)
+Project: password-reset
+Playbook: playbooks/playbook.yml
+Execution Environment: Default execution environment
+Credentials: Create credentials for to access your RHEL host
+Extra vars: Prompt on launch
+```
 ![Job template](img/job_template.png)
 
 **Create the job template.** This template runs a playbook to reset the password of user on a RHEL host. It's NOT production-ready (as the password is in plain text), but it'll work for us. Here's the playbook.
@@ -84,7 +87,7 @@ We'll create a rulebook activation. Rulebook activations **detect events from a 
 
 First, we'll create a decision project. Under the **Automation Decisions** menu, select **Projects** and choose **Create a new project**. Use the following details.
 
-```yml
+```
 Name: password-reset
 Organization: Default
 Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
