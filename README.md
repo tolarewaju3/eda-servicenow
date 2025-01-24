@@ -274,7 +274,7 @@ There's a lot going on here. Here are the important steps.
 
 1. **Build a payload** with variables from our incident (username, userID, incident number)
 1. **Create a REST message** with the payload and our authorization headers
-1. **Send the REST message** to the Ansible webhook url
+1. **Send the REST message** to the Ansible webhook url with our token
 
 **Click Submit** to create the rule.
 
