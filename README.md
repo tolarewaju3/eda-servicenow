@@ -84,9 +84,11 @@ We'll create a rulebook activation. Rulebook activations **detect events from a 
 
 First, we'll create a decision project. Under the **Automation Decisions** menu, select **Projects** and choose **Create a new project**. Use the following details.
 
-* **Name:** password-reset
-* **Organization:** Default
-* **Source control URL:** https://github.com/tolarewaju3/eda-servicenow.git
+```yml
+Name: password-reset
+Organization: Default
+Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
+```
 
 ![Decision environment](img/decision_environment.png)
 
@@ -108,10 +110,12 @@ Click Create Credential. This token will be used in our webhook and sent with ou
 
 **Next, create the event stream.** Under the **Automation Decisions** menu, select **Event Streams** and choose **Create Event Stream**. Use the following details.
 
-* **Name:** servicenow
-* **Organization:** Default
-* **Event stream type:** ServiceNow Event Stream
-* **Credential:** servicenow-credential
+```yml
+Name: servicenow
+Organization: Default
+Event stream type: ServiceNow Event Stream
+Credential: servicenow-credential
+```
 
 ![Event stream](img/event_stream.png)
 
@@ -119,19 +123,22 @@ Click **Create event stream**. After it finishes, **copy the webhook url** as we
 
 **Next, we'll create an AAP credential.** Under the **Automation Decisions** menu, in the **Infrastructure** section, select **Credentials** and choose **Create a Credential**.
 
-* **Name:** aap
-* **Organization:** Default
-* **Credential type:** Red Hat Ansible Automation Platform
-* **Red Hat Ansible Automation Platform:** https://<<your_gateway_host>>/api/controller/
-* **Username:** <your_aap_admin_username>
-* **Password:** <your_aap_admin_password>
+```yml
+Name: aap
+Organization: Default
+Credential type: Red Hat Ansible Automation Platform
+Red Hat Ansible Automation Platform: https://<<your_gateway_host>>/api/controller/
+Username: <your_aap_admin_username>
+Password: <your_aap_admin_password>
+```
 
 ![AAP Credentials](img/aap_creds.png)
 
 **Create the credential.** This credential will allow our rulebook to call the password reset job on our Ansible controller. You can find your gateway url in the setting tab.
 
 **Finally, create a rulebook activation.** Under the **Automation Decisions** menu, in the **Rulebook Activations** section, choose **Create Rulebook Activation.** 
-```
+
+```yml
 Name: password-reset
 Organization: Default
 Project: password-reset
@@ -166,11 +173,13 @@ Next, we'll send events to Ansible each time we open a ticket (or incident). For
 
 In the top right, select **New** and enter the following:
 
-* **Name:** Send Incident to Ansible EDA
-* **Table:** Incident [Incident]
-* **Advanced:** Selected
-* **When to run:** async
-* **Insert:** Selected
+```yml
+Name: Send Incident to Ansible EDA
+Table: Incident [Incident]
+Advanced: Selected
+When to run: async
+Insert: Selected
+```
 
 ![ServiceNow select business rule](img/business_rule.png)
 
