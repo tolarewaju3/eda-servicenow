@@ -176,7 +176,7 @@ Next, we'll send events to Ansible each time we open a ticket (or incident). For
 
 In the top right, select **New** and enter the following:
 
-```yml
+```
 Name: Send Incident to Ansible EDA
 Table: Incident [Incident]
 Advanced: Selected
