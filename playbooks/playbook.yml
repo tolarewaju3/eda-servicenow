@@ -1,5 +1,5 @@
 ---
-- name: List all users on RHEL host
+- name: Reset password on RHEL host
   hosts: all  # Specify your target host group
   become: yes  # Use 'become' if root privileges are needed
   tasks:

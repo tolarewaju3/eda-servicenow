@@ -12,7 +12,7 @@ A key example of this is resetting employee's forgotten passwords. But while emp
 
 Our archiecture will capture ServiceNow password reset tickets, reset the password on a RHEL host, and notify the user. The architecture has three main parts.
 
-* **SerivceNow Instance** - IT Service management for password reset tickets
+* **SerivceNow** - IT Service management where we'll submit password reset tickets
 * **Ansible EDA** - Event Driven Automation to respond to password reset tickets
 * **RHEL Host** - Password reset target
 
@@ -30,9 +30,11 @@ Our archiecture will capture ServiceNow password reset tickets, reset the passwo
 
 We'll create two projects: an execution project and a decision project. 
 
-The execution project contains our playbook that resets the password, while our decision project contains rulebooks to capture ServiceNow events.
+The execution project contains a playbook that resets the password on the RHEL host, while our decision project a rulebook that captures ServiceNow events and calls the playbook.
 
-**Create an Execution Project.** Sign in to your ansible instance and select `Automation Execution --> Projects --> Create project`. Use the following details.
+### Create Execution Project
+
+First, sign in to your ansible instance and select `Automation Execution --> Projects --> Create project`. Use the following details.
 
 * **Name:** password-reset
 * **Organization:** Default
@@ -44,6 +46,25 @@ You should see the `Last job status` as Success.
 
 ![Exeuciton project](img/execution_project.png)
 
+This repository contains a playbook to reset a password on a RHEL host. It's by no means meant for production (as the password is in plain text), but it'll work for us. Here's the playbook.
+
+```yml
+---
+- name: Reset password on RHEL host
+  hosts: all  # Specify your target host group
+  become: yes  # Use 'become' if root privileges are needed
+  tasks:
+
+    - name: Print Vars
+      debug:
+        msg: Resetting password for {{ username }}
+
+    - name: Set password for user
+      user:
+        name: "{{ username }}"
+        password: "{{ 'NewSecurePassword123!' | password_hash('sha512') }}"
+```
+
 **Create a job template** to run our playbook. In your ansible instance, select `Templates --> Create Template`. Use the following details.
 
 * **Name:** password-reset
@@ -52,14 +73,16 @@ You should see the `Last job status` as Success.
 * **Project:** password-reset
 * **Playbook:** playbooks/playbook.yml
 * **Execution Environment:** Default execution environment
-* **Credentials:** (RHEL host creds)
+* **Credentials:** Create credentials for to access your RHEL host
 * **Extra vars:** Prompt on launch
 
 ![Job template](img/job_template.png)
 
+### Create Deicison Project
+
 The second project we'll create is a decision project. This contains the event driven logic to receive ServiceNow events and trigger the job template we created.
 
-**Create a New Decision Project.** In your ansible instance, select `Automation Decisions --> Projects --> Create project`. Use the following details.
+First, select `Automation Decisions --> Projects --> Create project`. Use the following details.
 
 * **Name:** password-reset
 * **Organization:** Default
@@ -69,32 +92,31 @@ Again, make sure you see the `Status` as Completed.
 
 ![Decision environment](img/decision_environment.png)
 
-Next, we'll create an Event Stream. Event Streams are easy ways to capture events from external systems into Ansible. They are essentially server-side webhooks.
+Next, we'll create an Event Stream. Event Streams are easy ways to capture events from external systems into Ansible. This is the server-side webhook the ServiceNow will send events to.
 
-**First, create an Event Stream token.** In your ansible instance, select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
+**Create an Event Stream token.** Select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
 
 * **Name:** servicenow-credential
 * **Organization:** Default
 * **Credential type:** ServiceNow Event Stream
-* **Token:** GENERATE_A_RANDOM_TOKEN
+* **Token:** Generate a random token and write it down! We'll use it later
 
 Click Create Credential.
 
 ![Credential](img/credential.png)
 
-**Next, create an event stream** for ServiceNow to send events to.
-Select `Automation Decisions --> Event Streams --> Create Event Stream`. Use the following details.
+**Next, create the event stream.** Select `Automation Decisions --> Event Streams --> Create Event Stream`. Use the following details.
 
 * **Name:** servicenow
 * **Organization:** Default
 * **Event stream type:** ServiceNow Event Stream
 * **Credential:** servicenow-credential
 
-Click Create event stream. After it finishes, copy the webhook url as we'll use this later in ServiceNow.
+Click Create event stream. After it finishes, **copy the webhook url** as we'll use this later in ServiceNow.
 
 ![Event stream](img/event_stream.png)
 
-**Next, we'll create an AAP credential** so that our rulebook can call jobs on our Ansible controller. 
+**Then, we'll create an AAP credential** so that our rulebook can call the password reset job on our Ansible controller. 
 
 Select `Automation Decisions --> Infrastructure --> Credentials --> Create Credential`. Use the following details.
 
@@ -123,7 +145,7 @@ You should see the `Activation status` as Running.
 
 ## Setup ServiceNow Envrionment
 
-We'll use ServiceNow as our incident management system for password request tickets. If you already have a ServiceNow instance in your environment, you can skip to the business rule step.
+We'll use ServiceNow as our incident management system for password request tickets. If you already have a ServiceNow instance in your environment, you can skip to the "Create a Business Rule" step.
 
 **First, sign up for a ServiceNow developer account.** Navigate to [developer.servicenow.com](https://developer.servicenow.com) and select `Sign Up and Start Building`.
 
@@ -151,7 +173,7 @@ In the top right, select `New` and enter the following:
 
 ![ServiceNow select business rule](img/business_rule.png)
 
-**Switch over to the advanced tab** and replace the code with this.
+**Switch over to the advanced tab** and replace the code with this. Don't forget to insert your own webhook url and token.
 
 ```js
 (function executeRule(current, previous /*null when async*/) {
