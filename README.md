@@ -1,4 +1,4 @@
-# Autoamted Password Reset (ServiceNow + Ansible)
+# Automated Password Reset (ServiceNow + Ansible)
 
 ## The Problem
 
