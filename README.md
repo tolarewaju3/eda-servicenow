@@ -129,7 +129,7 @@ Select `Automation Decisions --> Infrastructure --> Credentials --> Create Crede
 
 ![AAP Credentials](img/aap_creds.png)
 
-Finally, **create a rulebook activation** to trigger our password reset job based on the ServiceNow event. Select `Automation Decisions --> Rulebook Activations --> Create Rulebook Activation`. Use the following details.
+Finally, **create a rulebook activation** to trigger our password reset job based on the ServiceNow event. Select `Automation Decisions --> Rulebook Activations --> Create Rulebook Activation`.
 
 * **Name:** password-reset
 * **Organization:** Default
