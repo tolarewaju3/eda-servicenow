@@ -184,7 +184,7 @@ Insert: Selected
 
 ![ServiceNow select business rule](img/business_rule.png)
 
-**Switch over to the advanced tab** and replace the code with this. Don't forget to insert your own webhook url and token.
+**Switch to the advanced tab** and replace the code with this. Don't forget to insert your webhook url and token.
 
 ```js
 (function executeRule(current, previous /*null when async*/) {
