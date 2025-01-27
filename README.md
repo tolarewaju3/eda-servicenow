@@ -120,7 +120,7 @@ Credential: servicenow-credential
 
 ![Event stream](img/event_stream.png)
 
-Click **Create event stream**. After it finishes, **copy the webhook url** as we'll use this later in ServiceNow.
+Click **Create event stream**. After it finishes, **copy the webhook URL** as we'll use this later in ServiceNow.
 
 **Next, we'll create an AAP credential.** Under the *Automation Decisions* menu, in the *Infrastructure* section, select *Credentials* and **choose Create a Credential**.
 
@@ -128,14 +128,14 @@ Click **Create event stream**. After it finishes, **copy the webhook url** as we
 Name: aap
 Organization: Default
 Credential type: Red Hat Ansible Automation Platform
-Red Hat Ansible Automation Platform: https://<<your_gateway_host>>/api/controller/
+Red Hat Ansible Automation Platform: https://<<your_base_url>>/api/controller/
 Username: <your_aap_admin_username>
 Password: <your_aap_admin_password>
 ```
 
 ![AAP Credentials](img/aap_creds.png)
 
-**Create the credential.** This credential will allow our rulebook to call the password reset job on our Ansible controller. You can find your gateway url in the setting tab.
+**Create the credential.** This credential will allow our rulebook to call the password reset job on our Ansible controller. You can find your base url under *Settings* in the *System* section.
 
 **Finally, create a rulebook activation.** Under the *Automation Decisions* menu, in the *Rulebook Activations* section, choose **Create Rulebook Activation.** 
 
