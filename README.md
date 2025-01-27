@@ -150,7 +150,7 @@ Event streams: servicenow
 ```
 ![Rulebook activation](img/rulebook_activation.png)
 
-**Create the rulebook.** This rulebook will trigger our password reset job when it receives events from ServiceNow. ServiceNow event. Here's the rulebook we're using.
+**Create the rulebook activation.** This rulebook will trigger our password reset job when it receives events from ServiceNow. ServiceNow event. Here's the rulebook we're using.
 
 ```yml
 ---
@@ -181,7 +181,7 @@ After the rulebook activation starts, the Activation status should be `Running`.
 
 We'll use ServiceNow as our incident management system for password request tickets. If you already have a ServiceNow instance in your environment, you can skip to the "Create a Business Rule" step.
 
-**First, sign up for a ServiceNow developer account.** Navigate to [developer.servicenow.com](https://developer.servicenow.com) and select **Sign Up and Start Building**.
+First, **sign up for a ServiceNow developer account.** Navigate to [developer.servicenow.com](https://developer.servicenow.com) and select **Sign Up and Start Building**.
 
 ![ServiceNow home](img/servicenow_home.png)
 
