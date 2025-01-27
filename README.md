@@ -97,17 +97,17 @@ Create the project. Make sure the Status shows `Completed`.
 
 Next, we'll create an Event Stream. Event Streams are a **simple way to capture events from external systems.** This serves as the server-side webhook where ServiceNow will send events.
 
-**Create an Event Stream token.** Under the *Automation Decisions* menu, in the *Infrastructure* section, select *Credentials* and **choose Create a Credential**. Use the following details.
+**Create an Event Stream token.** Under the *Automation Decisions* menu, in the *Infrastructure* section, select *Credentials* and **choose Create a Credential**. Generate a random token [here](https://it-tools.tech/token-generator?length=21) and use the details below.
 
 ```
 Name: servicenow-credential
 Organization: Default
 Credential type: ServiceNow Event Stream
-Token: Generate a random token and save it for later!
+Token: Your token. Make sure to save it for later!
 ```
 ![Credential](img/credential.png)
 
-Click Create Credential. This token will be used in our webhook and sent with our ServiceNow REST calls. You can generate a random token [here](https://it-tools.tech/token-generator?length=21)
+Click Create Credential. This token will be used in our webhook and sent with our ServiceNow REST calls. 
 
 **Next, create the event stream.** Under the *Automation Decisions* menu, select *Event Streams* and **choose Create Event Stream**. Use the following details.
 
