@@ -330,4 +330,6 @@ Hit Submit.
 
 Change the caller to `test-user`. For the short description, select the lightbulb on the right and **choose Reset my password.** Our rulebook will only fire for events that contain the description "Password reset".
 
-**Submit the incident.** If all went well, you should see the job template run in AAP.
+**Submit the incident.** If all went well, you should see the job template run in AAP and your user should have a new password.
+
+*Note that if there is no user present, the playbook will create one*
