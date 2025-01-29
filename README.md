@@ -6,7 +6,7 @@
 
 A key example of this is resetting employee's forgotten passwords. But while employees wait, productivity stalls, costing money on both ends—IT resolving the issue and employees stuck in limbo. 
 
-**Enter Event-Driven Ansible.** It automates responses to events, saving time and money.
+**Enter Event-Driven Ansible.** It can automates responses to events, like password reset requests, saving a ton of time and money.
 
 ## The Architecture
 
