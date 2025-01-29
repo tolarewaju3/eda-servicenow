@@ -45,9 +45,9 @@ Organization: Default
 
 ![Create inventory](img/create_inventory.png)
 
-
 **Next, create the target host** to run our automation against. On the inventories page, select the *Hosts* tab and choose **Create Host.** Enter the publicly accessible hostname of your host (Ex. `ec2-24-191-132-171.us-east-2.compute.amazonaws.com`)
 
+![Create host](img/create_host.png)
 
 **Finally, create credentials** to access the host. Under the *Automation Execution* menu, in the *Infrastructure* section, select *Credentials* and **choose Create Credentials**.
 
@@ -58,11 +58,11 @@ Credential Type: Machine
 Username: <your_username>
 Private Key or Password: <your_key>
 ```
-
+![Create credentials](img/create_credential.png)
 
 ### Create a Job Template
 
-First, **sign in** to your ansible instance. Under the *Automation Execution* menu, select *Projects* and **choose Create project**. Use the following details.
+**First, create an execution project.** Under the *Automation Execution* menu, select *Projects* and **choose Create project**. Use the following details.
 
 ```
 Name: password-reset
