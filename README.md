@@ -32,7 +32,7 @@ We'll create an ansible inventory, a job template and a rulebook.
 
 The Ansible inventory specifies **the systems** where passwords will be reset, the job template outlines **how the reset** will be performed, and the rulebook determines **which events trigger a reset.**
 
-### Create a RHEL Host Inventory
+### Create an Inventory
 
 We'll define our target system in the invetory. If you already have an inventory with your target system, skip to the next section.
 
@@ -45,7 +45,7 @@ Organization: Default
 
 ![Create inventory](img/create_inventory.png)
 
-**Next, create the target host.**. On the inventories page, select the *Hosts* tab and choose **Create Host.** Enter the publicly accessible hostname of your host (Ex. `ec2-24-191-132-171.us-east-2.compute.amazonaws.com`)
+**Next, create the target host.** On the Inventories page, select the *Hosts* tab and choose **Create Host.** Enter the publicly accessible hostname of your host (Ex. `ec2-24-191-132-171.us-east-2.compute.amazonaws.com`)
 
 ![Create host](img/create_host.png)
 
