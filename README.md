@@ -45,7 +45,7 @@ Organization: Default
 
 ![Create inventory](img/create_inventory.png)
 
-**Next, create the target host** to run our automation against. On the inventories page, select the *Hosts* tab and choose **Create Host.** Enter the publicly accessible hostname of your host (Ex. `ec2-24-191-132-171.us-east-2.compute.amazonaws.com`)
+**Next, create the target host.**. On the inventories page, select the *Hosts* tab and choose **Create Host.** Enter the publicly accessible hostname of your host (Ex. `ec2-24-191-132-171.us-east-2.compute.amazonaws.com`)
 
 ![Create host](img/create_host.png)
 
