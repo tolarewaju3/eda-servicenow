@@ -28,11 +28,41 @@ Our architecture will capture ServiceNow password reset tickets, reset the passw
 
 ## Setup Ansible Envrionment
 
-We'll create a job template and a rulebook. The job template **runs a playbook to reset the password** on the RHEL host, while the rulebook **captures ServiceNow events and calls the job template.**
+We'll create an ansible inventory, a job template and a rulebook.
+
+The Ansible inventory specifies **the systems** where passwords will be reset, the job template outlines **how the reset** will be performed, and the rulebook determines **which events trigger a reset.**
+
+### Create a RHEL Host Inventory
+
+We'll define our target system in the invetory. If you already have an inventory with your target system, skip to the next section.
+
+**First, create a new inventory.** Under the *Automation Execution* menu, in the *Infrastructure* section, select *Inventories* and **choose Create Inventory**. Use the following details.
+
+```
+Name: RHEL Inventory
+Organization: Default
+```
+
+![Create inventory](img/create_inventory.png)
+
+
+**Next, create the target host** to run our automation against. On the inventories page, select the *Hosts* tab and choose **Create Host.** Enter the publicly accessible hostname of your host (Ex. `ec2-24-191-132-171.us-east-2.compute.amazonaws.com`)
+
+
+**Finally, create credentials** to access the host. Under the *Automation Execution* menu, in the *Infrastructure* section, select *Credentials* and **choose Create Credentials**.
+
+```
+Name: RHEL Host
+Organization: Default
+Credential Type: Machine
+Username: <your_username>
+Private Key or Password: <your_key>
+```
+
 
 ### Create a Job Template
 
-First, **sign in** to your ansible instance. Under the *Automation Execution* memu, select *Projects* and **choose Create project**. Use the following details.
+First, **sign in** to your ansible instance. Under the *Automation Execution* menu, select *Projects* and **choose Create project**. Use the following details.
 
 ```
 Name: password-reset
@@ -46,7 +76,7 @@ Source control URL: https://github.com/tolarewaju3/eda-servicenow.git
 
 Create the project. You should see the `Last job status` as Success.
 
-**Next, create a job template.** Under the *Automation Execution* memu, select *Templates* and **choose Create Template**. Use the following details.
+**Next, create a job template.** Under the *Automation Execution* menu, select *Templates* and **choose Create Template**. Use the following details.
 
 ```
 Name: password-reset
