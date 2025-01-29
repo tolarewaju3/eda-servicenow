@@ -81,11 +81,11 @@ Create the project. You should see the `Last job status` as Success.
 ```
 Name: password-reset
 Job type: Run
-Inventory: Demo inventory (where your RHEL host is)
+Inventory: RHEL Inventory
 Project: password-reset
 Playbook: playbooks/playbook.yml
 Execution Environment: Default execution environment
-Credentials: Create credentials for to access your RHEL host
+Credentials: rhel-creds
 Extra vars: Prompt on launch
 ```
 ![Job template](img/job_template.png)
