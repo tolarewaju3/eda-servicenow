@@ -10,7 +10,7 @@ A key example of this is resetting employee's forgotten passwords. But while emp
 
 ## The Architecture
 
-Our architecture will capture ServiceNow password reset tickets, reset the password on a RHEL host, and notify the user. The architecture has three main parts.
+Our architecture will capture ServiceNow password reset tickets and reset the password on a RHEL host. The architecture has three main parts.
 
 * **SerivceNow** - IT Service management where we'll submit password reset tickets
 * **Ansible EDA** - Event Driven Automation to respond to password reset tickets
